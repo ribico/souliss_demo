@@ -38,9 +38,9 @@
 #define T52          14   // Souliss_Logic_T52 - Temperature measure (-20, +50) °C
 #define T53          16	  // Souliss_Logic_T53 - Humidity measure (0, 100) %
 
-uint8_t ip_address[4]  = {192, 168, 1, 77};
-uint8_t subnet_mask[4] = {255, 255, 255, 0};
-uint8_t ip_gateway[4]  = {192, 168, 1, 1};
+uint8_t ip_address[4]  = {10, 14, 10, 77};
+uint8_t subnet_mask[4] = {255, 255, 0, 0};
+uint8_t ip_gateway[4]  = {10, 14, 10, 201};
 #define myvNet_address	ip_address[3]		// The last byte of the IP address (77) is also the vNet address
 
 void setup()
@@ -106,10 +106,12 @@ void loop()
 
         SLOW_x10s(2) {
 
-    	    ImportAnalog(T52,24+random(0, 100)/100*5);
+          float val = 24+random(0, 100)/100*5;
+    	    ImportAnalog(T52, &val);
     	    Logic_T52(T52);
 
-    	    ImportAnalog(T53,50+random(0, 100)/100*15)
+          val = 50+random(0, 100)/100*15;
+    	    ImportAnalog(T53, &val);
     	    Logic_T53(T53);
         }
     }
