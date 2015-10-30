@@ -54,7 +54,6 @@ void setup()
     Set_T12(T12);
     Set_T13(T13);
     Set_T14(T14);
-    Set_T15(T15);
     Set_T16(T16);
     Set_T18(T18);
     Set_T19(T19);
@@ -72,16 +71,24 @@ void loop()
     EXECUTEFAST() {
         UPDATEFAST();
 
-        FAST_50ms() {   // We process the logic and relevant input and output every 50 milliseconds
+        SHIFT_50ms(0) {   // We process the logic and relevant input and output every 50 milliseconds
             Logic_T11(T11);
             Logic_T12(T12);
+        }
+
+        SHIFT_50ms(1) {   // We process the logic and relevant input and output every 50 milliseconds
             Logic_T13(T13);
             Logic_T14(T14);
-            Logic_T15(T15);
+        }
+
+
+        SHIFT_50ms(2) {   // We process the logic and relevant input and output every 50 milliseconds
             Logic_T16(T16);
             Logic_T18(T18);
-            Logic_T19(T19);
+        }
 
+        SHIFT_50ms(3) {   // We process the logic and relevant input and output every 50 milliseconds;
+            Logic_T19(T19);
             Logic_T22(T22);
         }
 
