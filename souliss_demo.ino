@@ -34,9 +34,16 @@
 #define T19          11   // Dimmable Single Color LED Strip
 
 #define T22          13   // Motorized devices with limit switches and middle position
-                      //*************** ** RANDOM IN ** **********************
+
+//*************** ** RANDOM IN ** **********************
 #define T52          14   // Souliss_Logic_T52 - Temperature measure (-20, +50) °C
 #define T53          16	  // Souliss_Logic_T53 - Humidity measure (0, 100) %
+
+//*************** ** SETPOINTS ** **********************
+#define T65          18   // Souliss_Logic_T65 - Voltage (0, 400) V
+#define T66          20   // Souliss_Logic_T66 - Current (0, 25)  A
+#define T67          22   // Souliss_Logic_T67 - Power (0, 6500)  W
+
 
 uint8_t ip_address[4]  = {10, 14, 10, 77};
 uint8_t subnet_mask[4] = {255, 255, 0, 0};
@@ -63,6 +70,9 @@ void setup()
     Set_T52(T52);
     Set_T53(T53);
 
+    Souliss_SetT65(memory_map, T65);
+    Souliss_SetT66(memory_map, T66);
+    Souliss_SetT67(memory_map, T67);
 }
 
 void loop()
@@ -90,6 +100,12 @@ void loop()
         SHIFT_50ms(3) {   // We process the logic and relevant input and output every 50 milliseconds;
             Logic_T19(T19);
             Logic_T22(T22);
+        }
+
+        SHIFT_50ms(4) {   // We process the logic and relevant input and output every 50 milliseconds;
+            Souliss_Logic_T65(memory_map, T65, 0.1, &data_changed);
+            Souliss_Logic_T66(memory_map, T66, 0.1, &data_changed);
+            Souliss_Logic_T67(memory_map, T67, 0.1, &data_changed);
         }
 
         // Here we handle here the communication with Android, commands and notification
