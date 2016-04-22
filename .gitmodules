@@ -1,3 +1,6 @@
 [submodule "souliss"]
 	path = souliss
 	url = ../souliss.git
+[submodule "libraries/souliss"]
+	path = libraries/souliss
+	url = ../souliss.git
