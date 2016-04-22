@@ -39,6 +39,11 @@
 #define T52          14   // Souliss_Logic_T52 - Temperature measure (-20, +50) °C
 #define T53          16	  // Souliss_Logic_T53 - Humidity measure (0, 100) %
 
+//*************** ** SETPOINTS ** **********************
+#define T65          18   // Souliss_Logic_T65 - Voltage (0, 400) V
+#define T66          20   // Souliss_Logic_T66 - Current (0, 25)  A
+#define T67          22   // Souliss_Logic_T67 - Power (0, 6500)  W
+
 
 uint8_t ip_address[4]  = {10, 14, 10, 77};
 uint8_t subnet_mask[4] = {255, 255, 0, 0};
@@ -64,6 +69,10 @@ void setup()
 
     Set_T52(T52);
     Set_T53(T53);
+
+    Set_Voltage_Setpoint(T65);
+    Set_Current_Setpoint(T66);
+    Set_Power_Setpoint(T67);
 }
 
 void loop()
@@ -91,6 +100,12 @@ void loop()
         SHIFT_50ms(3) {   // We process the logic and relevant input and output every 50 milliseconds;
             Logic_T19(T19);
             Logic_T22(T22);
+        }
+
+        SHIFT_50ms(4) {   // We process the logic and relevant input and output every 50 milliseconds;
+            Logic_Voltage_Setpoint(T65);
+            Logic_Current_Setpoint(T66);
+            Logic_Power_Setpoint(T67);
         }
 
         // Here we handle here the communication with Android, commands and notification
