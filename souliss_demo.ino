@@ -70,9 +70,9 @@ void setup()
     Set_T52(T52);
     Set_T53(T53);
 
-    Souliss_SetT65(memory_map, T65);
-    Souliss_SetT66(memory_map, T66);
-    Souliss_SetT67(memory_map, T67);
+    Set_Voltage_Setpoint(T65);
+    Set_Current_Setpoint(T66);
+    Set_Power_Setpoint(T67);
 }
 
 void loop()
@@ -103,9 +103,9 @@ void loop()
         }
 
         SHIFT_50ms(4) {   // We process the logic and relevant input and output every 50 milliseconds;
-            Souliss_Logic_T65(memory_map, T65, 0.1, &data_changed);
-            Souliss_Logic_T66(memory_map, T66, 0.1, &data_changed);
-            Souliss_Logic_T67(memory_map, T67, 0.1, &data_changed);
+            Logic_Voltage_Setpoint(T65);
+            Logic_Current_Setpoint(T66);
+            Logic_Power_Setpoint(T67);
         }
 
         // Here we handle here the communication with Android, commands and notification
